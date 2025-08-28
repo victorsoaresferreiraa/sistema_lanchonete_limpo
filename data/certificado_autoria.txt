@@ -10,13 +10,13 @@
 • Data de Criação: 28/08/2025
 
 🔐 ASSINATURA DIGITAL:
-fafb753db325fd621da1735221bb9f8a423bdc5f12a9a3afb5f85bc3634a2738
+f38c055db3e167774c3c06b652fd910cc9f0ba042a194f46a1964321a2b37483
 
 💻 HARDWARE LICENCIADO:
 c872cf18d95379fe32eea20fb9252b1c
 
 📅 CERTIFICADO GERADO EM:
-28/08/2025 13:58:48
+28/08/2025 16:38:20
 
 ⚖️ AVISO LEGAL:
 Este software é protegido por direitos autorais.

@@ -1,0 +1,234 @@
+{
+  "inicio": "2025-08-28T18:13:30.013955",
+  "fim": "2025-08-28T18:13:30.113025",
+  "total_testes": 32,
+  "sucessos": 32,
+  "falhas": 0,
+  "taxa_sucesso": 100.0,
+  "resultados": [
+    {
+      "teste": "1.1 Arquivo Banco",
+      "status": "PASS",
+      "detalhes": "banco.db encontrado",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.015927"
+    },
+    {
+      "teste": "1.2 Tabela Estoque",
+      "status": "PASS",
+      "detalhes": "Tabela estoque existe",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.017509"
+    },
+    {
+      "teste": "1.3 Produtos Existentes",
+      "status": "PASS",
+      "detalhes": "21 produtos no banco",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.017887"
+    },
+    {
+      "teste": "1.4 Inserção Banco",
+      "status": "PASS",
+      "detalhes": "Inserção funcionando",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.072983"
+    },
+    {
+      "teste": "2.1 Produto Válido 'hamburguer'",
+      "status": "PASS",
+      "detalhes": "'hamburguer' aceito",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.097921"
+    },
+    {
+      "teste": "2.1 Produto Válido 'Batata Frita'",
+      "status": "PASS",
+      "detalhes": "'Batata Frita' aceito",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.098062"
+    },
+    {
+      "teste": "2.1 Produto Válido 'REFRIGERANTE'",
+      "status": "PASS",
+      "detalhes": "'REFRIGERANTE' aceito",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.098171"
+    },
+    {
+      "teste": "2.1 Produto Válido 'Pizza Margherita'",
+      "status": "PASS",
+      "detalhes": "'Pizza Margherita' aceito",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.098313"
+    },
+    {
+      "teste": "2.1 Produto Válido 'Suco de Laranja'",
+      "status": "PASS",
+      "detalhes": "'Suco de Laranja' aceito",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.098420"
+    },
+    {
+      "teste": "2.2 Produto Inválido ''",
+      "status": "PASS",
+      "detalhes": "Corretamente rejeitado",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.098526"
+    },
+    {
+      "teste": "2.2 Produto Inválido '   '",
+      "status": "PASS",
+      "detalhes": "Corretamente rejeitado",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.098644"
+    },
+    {
+      "teste": "2.2 Produto Inválido 'None'",
+      "status": "PASS",
+      "detalhes": "Corretamente rejeitado",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.098861"
+    },
+    {
+      "teste": "3.1 Conversão Preço '15.00'",
+      "status": "PASS",
+      "detalhes": "15.00 → 15.0",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.099075"
+    },
+    {
+      "teste": "3.1 Conversão Preço '15,50'",
+      "status": "PASS",
+      "detalhes": "15,50 → 15.5",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.099676"
+    },
+    {
+      "teste": "3.1 Conversão Preço '8.75'",
+      "status": "PASS",
+      "detalhes": "8.75 → 8.75",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.099794"
+    },
+    {
+      "teste": "3.1 Conversão Preço '10'",
+      "status": "PASS",
+      "detalhes": "10 → 10.0",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.099911"
+    },
+    {
+      "teste": "3.1 Conversão Preço '0'",
+      "status": "PASS",
+      "detalhes": "0 → 0.0",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.100024"
+    },
+    {
+      "teste": "3.2 Cálculo Total 2x15.0",
+      "status": "PASS",
+      "detalhes": "Total: 30.0",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.100178"
+    },
+    {
+      "teste": "3.2 Cálculo Total 1x8.5",
+      "status": "PASS",
+      "detalhes": "Total: 8.5",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.100330"
+    },
+    {
+      "teste": "3.2 Cálculo Total 3x12.33",
+      "status": "PASS",
+      "detalhes": "Total: 36.99",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.100482"
+    },
+    {
+      "teste": "3.2 Cálculo Total 0x10.0",
+      "status": "PASS",
+      "detalhes": "Total: 0.0",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.100674"
+    },
+    {
+      "teste": "4.1 Adição Item",
+      "status": "PASS",
+      "detalhes": "Item adicionado: {'produto': 'Hamburguer', 'quantidade': 1, 'preco_unitario': 15.0, 'total': 15.0}",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.100868"
+    },
+    {
+      "teste": "4.2 Múltiplos Itens",
+      "status": "PASS",
+      "detalhes": "2 itens no carrinho",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.100985"
+    },
+    {
+      "teste": "4.3 Total Geral",
+      "status": "PASS",
+      "detalhes": "Total: R$ 22.00",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.101148"
+    },
+    {
+      "teste": "4.4 Formato TreeView Item 1",
+      "status": "PASS",
+      "detalhes": "Values: ('Hamburguer', 1, 'R$ 15.00', 'R$ 15.00')",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.101256"
+    },
+    {
+      "teste": "4.4 Formato TreeView Item 2",
+      "status": "PASS",
+      "detalhes": "Values: ('Refrigerante', 2, 'R$ 3.50', 'R$ 7.00')",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.101472"
+    },
+    {
+      "teste": "5.1 Diretório 'data'",
+      "status": "PASS",
+      "detalhes": "Diretório data existe",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.101865"
+    },
+    {
+      "teste": "5.1 Diretório 'src'",
+      "status": "PASS",
+      "detalhes": "Diretório src existe",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.102038"
+    },
+    {
+      "teste": "5.2 Arquivo 'main_funcional.py'",
+      "status": "PASS",
+      "detalhes": "Arquivo existe (189855 bytes)",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.102226"
+    },
+    {
+      "teste": "5.2 Arquivo 'sistema_protecao_autoria.py'",
+      "status": "PASS",
+      "detalhes": "Arquivo existe (19591 bytes)",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.102716"
+    },
+    {
+      "teste": "5.2 Arquivo 'data/banco.db'",
+      "status": "PASS",
+      "detalhes": "Arquivo existe (49152 bytes)",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.102932"
+    },
+    {
+      "teste": "5.3 Criação Arquivo",
+      "status": "PASS",
+      "detalhes": "Arquivo temporário criado",
+      "erro": "",
+      "timestamp": "2025-08-28T18:13:30.106632"
+    }
+  ]
+}
