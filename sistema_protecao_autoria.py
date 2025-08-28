@@ -44,12 +44,16 @@ class SistemaProtecaoAutoria:
         self.versao_sistema = "1.0.0"
         self.data_criacao = "28/08/2025"
         
+        # Senha de desenvolvedor para bypass (criptografada)
+        self.senha_desenvolvedor_hash = hashlib.sha256("Victor@1307".encode()).hexdigest()
+        
         # Assinatura digital única do sistema
         self.assinatura_sistema = self._gerar_assinatura_sistema()
         
         # Arquivo de licença
         self.arquivo_licenca = "data/licenca_sistema.dat"
         self.arquivo_hardware = "data/hardware_id.dat"
+        self.arquivo_bypass = "data/bypass_desenvolvedor.dat"
         
         # Verificar integridade na inicialização
         self._verificar_integridade_sistema()
@@ -116,10 +120,15 @@ class SistemaProtecaoAutoria:
             self._mostrar_aviso_violacao()
             return False
         
-        # Verificar licença
+        # Primeiro verificar se há bypass de desenvolvedor ativo
+        if self._verificar_bypass_desenvolvedor():
+            print("🔓 Acesso de desenvolvedor autorizado")
+            return True
+        
+        # Verificar licença normal
         if not self._verificar_licenca():
-            self._solicitar_ativacao()
-            return False
+            if not self._solicitar_ativacao():
+                return False
         
         return True
     
@@ -200,6 +209,113 @@ class SistemaProtecaoAutoria:
             print(f"Erro ao gerar licença: {e}")
             return False
     
+    def _verificar_senha_desenvolvedor(self):
+        """Verificar senha de desenvolvedor para bypass"""
+        root = tk.Tk()
+        root.withdraw()
+        
+        # Perguntar se é o desenvolvedor
+        resultado = messagebox.askyesno(
+            "🔐 Acesso de Desenvolvedor",
+            f"🔐 SISTEMA DE LANCHONETE\n"
+            f"Desenvolvido por: {self.autor_original}\n\n"
+            f"⚠️ Hardware não reconhecido ou licença expirada\n\n"
+            f"Você é o desenvolvedor Victor Soares Ferreira?\n"
+            f"Se sim, digite a senha de desenvolvedor para continuar."
+        )
+        
+        if resultado:
+            # Solicitar senha
+            senha = simpledialog.askstring(
+                "🔑 Senha de Desenvolvedor",
+                "Digite a senha de desenvolvedor:",
+                show='*'
+            )
+            
+            if senha:
+                senha_hash = hashlib.sha256(senha.encode()).hexdigest()
+                if senha_hash == self.senha_desenvolvedor_hash:
+                    # Salvar bypass temporário
+                    self._salvar_bypass_desenvolvedor()
+                    
+                    messagebox.showinfo(
+                        "✅ Acesso Autorizado",
+                        f"🎉 Bem-vindo, Victor!\n\n"
+                        f"Acesso de desenvolvedor autorizado.\n"
+                        f"Sistema liberado por 30 dias.\n\n"
+                        f"📧 Email: {self.email_autor}"
+                    )
+                    root.destroy()
+                    return True
+                else:
+                    messagebox.showerror(
+                        "❌ Senha Incorreta",
+                        "Senha de desenvolvedor incorreta.\n"
+                        "Acesso negado."
+                    )
+            else:
+                messagebox.showwarning(
+                    "⚠️ Cancelado",
+                    "Operação cancelada pelo usuário."
+                )
+        
+        root.destroy()
+        return False
+    
+    def _salvar_bypass_desenvolvedor(self):
+        """Salvar bypass de desenvolvedor por 30 dias"""
+        try:
+            os.makedirs("data", exist_ok=True)
+            
+            data_expiracao = datetime.now() + timedelta(days=30)
+            hardware_id = self._obter_hardware_id()
+            
+            bypass_data = {
+                "desenvolvedor": self.autor_original,
+                "email": self.email_autor,
+                "hardware_id": hardware_id,
+                "criacao": datetime.now().isoformat(),
+                "expiracao": data_expiracao.isoformat(),
+                "tipo": "bypass_desenvolvedor",
+                "versao": self.versao_sistema
+            }
+            
+            with open(self.arquivo_bypass, "w") as f:
+                json.dump(bypass_data, f, indent=2)
+            
+            return True
+        except Exception as e:
+            print(f"Erro ao salvar bypass: {e}")
+            return False
+    
+    def _verificar_bypass_desenvolvedor(self):
+        """Verificar se há bypass de desenvolvedor válido"""
+        try:
+            if not os.path.exists(self.arquivo_bypass):
+                return False
+            
+            with open(self.arquivo_bypass, "r") as f:
+                bypass_data = json.load(f)
+            
+            # Verificar expiração
+            data_expiracao = datetime.fromisoformat(bypass_data["expiracao"])
+            if datetime.now() > data_expiracao:
+                # Bypass expirado, remover arquivo
+                os.remove(self.arquivo_bypass)
+                return False
+            
+            # Verificar hardware
+            hardware_atual = self._obter_hardware_id()
+            if bypass_data["hardware_id"] != hardware_atual:
+                return False
+            
+            print(f"✅ Bypass de desenvolvedor ativo até {data_expiracao.strftime('%d/%m/%Y')}")
+            return True
+            
+        except Exception as e:
+            print(f"Erro ao verificar bypass: {e}")
+            return False
+
     def _solicitar_ativacao(self):
         """Solicitar ativação do sistema"""
         root = tk.Tk()
@@ -234,6 +350,9 @@ class SistemaProtecaoAutoria:
                     "Não foi possível ativar o sistema.\n"
                     "Entre em contato com o desenvolvedor."
                 )
+        else:
+            # Se não quis ativar, oferecer opção de senha de desenvolvedor
+            return self._verificar_senha_desenvolvedor()
         
         root.destroy()
         return False
