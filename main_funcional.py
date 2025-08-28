@@ -565,9 +565,28 @@ class CadastroRapidoWindow:
         try:
             produto = self.produto_var.get().strip()
             categoria = self.categoria_var.get().strip() or "Outros"
-            quantidade = int(self.quantidade_var.get() or 0)
-            preco_str = self.preco_var.get().replace(',', '.')  # Aceitar vírgula como decimal
-            preco = float(preco_str)
+            
+            # Validação robusta para quantidade
+            quantidade_str = self.quantidade_var.get().strip()
+            if not quantidade_str:
+                quantidade = 0
+            else:
+                try:
+                    quantidade = int(float(quantidade_str))  # Converte float para int para aceitar "10.0"
+                except ValueError:
+                    messagebox.showerror("Erro", f"Quantidade deve ser um número inteiro!\nVocê digitou: '{quantidade_str}'")
+                    return
+            
+            # Validação robusta para preço
+            preco_str = self.preco_var.get().strip().replace(',', '.')  # Aceitar vírgula como decimal
+            if not preco_str:
+                preco = 0.0
+            else:
+                try:
+                    preco = float(preco_str)
+                except ValueError:
+                    messagebox.showerror("Erro", f"Preço deve ser um número válido!\nVocê digitou: '{preco_str}'")
+                    return
             
             if not produto:
                 messagebox.showerror("Erro", "O nome do produto é obrigatório!")
@@ -876,8 +895,20 @@ class EstoqueWindow:
         try:
             produto = self.produto_var.get().strip()
             categoria = self.categoria_var.get().strip() or "Geral"
-            quantidade = int(self.quantidade_var.get())
-            preco = float(self.preco_var.get())
+            
+            # Validação robusta para quantidade
+            try:
+                quantidade = int(float(self.quantidade_var.get() or 0))
+            except ValueError:
+                messagebox.showerror("Erro", f"Quantidade deve ser um número inteiro!\nVocê digitou: '{self.quantidade_var.get()}'")
+                return
+                
+            # Validação robusta para preço
+            try:
+                preco = float(self.preco_var.get() or 0)
+            except ValueError:
+                messagebox.showerror("Erro", f"Preço deve ser um número válido!\nVocê digitou: '{self.preco_var.get()}'")
+                return
             
             if not produto:
                 messagebox.showerror("Erro", "Nome do produto é obrigatório")
@@ -921,8 +952,20 @@ class EstoqueWindow:
         try:
             produto = self.produto_var.get().strip()
             categoria = self.categoria_var.get().strip() or "Geral"
-            quantidade = int(self.quantidade_var.get())
-            preco = float(self.preco_var.get())
+            
+            # Validação robusta para quantidade
+            try:
+                quantidade = int(float(self.quantidade_var.get() or 0))
+            except ValueError:
+                messagebox.showerror("Erro", f"Quantidade deve ser um número inteiro!\nVocê digitou: '{self.quantidade_var.get()}'")
+                return
+                
+            # Validação robusta para preço
+            try:
+                preco = float(self.preco_var.get() or 0)
+            except ValueError:
+                messagebox.showerror("Erro", f"Preço deve ser um número válido!\nVocê digitou: '{self.preco_var.get()}'")
+                return
             
             if not produto:
                 messagebox.showerror("Erro", "Nome do produto é obrigatório")
@@ -1467,8 +1510,20 @@ Ctrl+2     - Finalizar fiado
         """Adicionar produto ao carrinho"""
         try:
             produto_info = self.produto_combo.get()
-            quantidade = int(self.quantidade_var.get())
-            preco = float(self.preco_var.get().replace(',', '.'))
+            
+            # Validação robusta para quantidade
+            try:
+                quantidade = int(float(self.quantidade_var.get() or 0))
+            except ValueError:
+                messagebox.showerror("Erro", f"Quantidade deve ser um número inteiro!\nVocê digitou: '{self.quantidade_var.get()}'")
+                return
+                
+            # Validação robusta para preço
+            try:
+                preco = float(self.preco_var.get().replace(',', '.') or 0)
+            except ValueError:
+                messagebox.showerror("Erro", f"Preço deve ser um número válido!\nVocê digitou: '{self.preco_var.get()}'")
+                return
             
             if not produto_info or produto_info == "Nenhum produto cadastrado":
                 messagebox.showerror("Erro", "Selecione um produto válido")
