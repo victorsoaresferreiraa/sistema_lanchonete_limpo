@@ -1,0 +1,16 @@
+
+📊 RELATÓRIO DE VENDAS DIÁRIAS
+Data: 31/08/2025
+==================================================
+
+💰 RESUMO FINANCEIRO:
+• Total de Vendas: 5
+• Receita Total: R$ 39.00
+• Ticket Médio: R$ 7.80
+
+📋 VENDAS DETALHADAS:
+ 1. Hamburguer           | Qtd:  1 | Preço: R$  15.00 | Total: R$   15.00 | 15:00:25
+ 2. Coxinha              | Qtd:  2 | Preço: R$   4.50 | Total: R$    9.00 | 15:00:25
+ 3. Coca Cola 600ml      | Qtd:  1 | Preço: R$   5.50 | Total: R$    5.50 | 14:47:22
+ 4. Pastel Carne         | Qtd:  1 | Preço: R$   6.00 | Total: R$    6.00 | 14:47:22
+ 5. Refrigerante         | Qtd:  1 | Preço: R$   3.50 | Total: R$    3.50 | 14:47:22

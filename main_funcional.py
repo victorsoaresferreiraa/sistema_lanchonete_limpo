@@ -196,8 +196,8 @@ class MainWindow:
     
     def __init__(self):
         self.root = tk.Tk()
-        self.root.title("🍔 Sistema de Lanchonete - Versão Estável")
-        self.root.geometry("900x700")
+        self.root.title("🍔 Sistema de Lanchonete - Versão Estável 1.0")
+        self.root.geometry("900x800")
         self.db = DatabaseManager()
         self.setup_ui()
         centralizar_janela(self.root)
@@ -255,10 +255,10 @@ class MainWindow:
             parent,
             text=texto,
             command=comando,
-            width=25
+            width=100
         )
-        btn.grid(row=row, column=0, pady=8, sticky="ew")
-        parent.columnconfigure(0, weight=1)
+        btn.grid(row=row, column=100, pady=8, sticky="ew")
+        parent.columnconfigure(0, weight=100)
     
     def abrir_estoque(self):
         """Abrir janela de estoque"""
@@ -3422,19 +3422,19 @@ class RelatorioVisualizadorWindow:
             import os
             from tkinter import filedialog
             
-            # Criar pasta de relatórios
+            # Criar pasta de relatórios se não existir
             os.makedirs("data/relatorios", exist_ok=True)
             
             # Nome padrão do arquivo
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            nome_arquivo = f"relatorio_{titulo.replace(' ', '_')}_{timestamp}.txt"
+            nome_arquivo_sugerido = f"relatorio_{titulo.replace(' ', '_')}_{timestamp}.txt"
             
             # Diálogo para salvar
             arquivo = filedialog.asksaveasfilename(
                 defaultextension=".txt",
                 filetypes=[("Arquivo de Texto", "*.txt"), ("Todos os Arquivos", "*.*")],
-                initialdir="data/relatorios",
-                initialfilename=nome_arquivo,
+                initialdir=os.path.join(os.getcwd(), "data", "relatorios"),
+                initialfile=nome_arquivo_sugerido,
                 title="Salvar Relatório"
             )
             
@@ -3442,7 +3442,7 @@ class RelatorioVisualizadorWindow:
                 with open(arquivo, 'w', encoding='utf-8') as f:
                     f.write(conteudo)
                 messagebox.showinfo("Sucesso", f"Relatório salvo em:\n{arquivo}")
-                
+            
         except Exception as e:
             messagebox.showerror("Erro", f"Erro ao salvar relatório: {e}")
     
@@ -4426,18 +4426,18 @@ def main():
     """Função principal"""
     print("🚀 Iniciando Sistema de Lanchonete...")
     
-    # Verificar sistema de proteção primeiro
-    if PROTECAO_ATIVA:
-        print("🔐 Verificando sistema de proteção...")
-        try:
-            protecao = SistemaProtecaoAutoria()
-            if not protecao.inicializar_protecao():
-                print("❌ Falha na verificação de proteção")
-                return
-            print("✓ Sistema de proteção OK")
-        except Exception as e:
-            print(f"⚠️ Erro no sistema de proteção: {e}")
-            # Continuar mesmo com erro de proteção para não travar o sistema
+    # Este é o bloco de proteção de autoria que está sendo desativado
+    # if PROTECAO_ATIVA:
+    #     print("🔐 Verificando sistema de proteção...")
+    #     try:
+    #         protecao = SistemaProtecaoAutoria()
+    #         if not protecao.inicializar_protecao():
+    #             print("❌ Falha na verificação de proteção")
+    #             return
+    #         print("✓ Sistema de proteção OK")
+    #     except Exception as e:
+    #         print(f"⚠️ Erro no sistema de proteção: {e}")
+    #         # Continuar mesmo com erro de proteção para não travar o sistema
     
     if not verificar_dependencias():
         print("❌ Erro: Dependências não disponíveis")

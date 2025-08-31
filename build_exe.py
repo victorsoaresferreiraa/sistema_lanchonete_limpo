@@ -13,7 +13,7 @@ def criar_icone():
     """Cria um ícone básico usando Pillow"""
     try:
         from PIL import Image, ImageDraw
-        
+
         ico_path = "assets/icon.ico"
         
         # Criar um ícone simples
@@ -73,19 +73,26 @@ def empacotar():
     print("\n=== Iniciando empacotamento ===")
     
     # Comando Nuitka
+    main_script = 'main_funcional.py'
+    output_exe = 'SistemaLanchonete.exe'
+    
+    print(f"📦 Empacotando {main_script} para {output_exe}...")
+    
     cmd = [
         sys.executable, '-m', 'nuitka',
         '--onefile',
         '--enable-plugin=tk-inter',
         '--windows-disable-console',
-        '--output-filename=SistemaLanchonete.exe',
-        '--include-data-dir=data=data',
-        '--include-data-dir=assets=assets',
+        f'--output-filename={output_exe}',
+        
+        # CORRIGIDO: Inclui a pasta 'src' e todo o seu conteúdo
         '--include-data-dir=src=src',
+        '--include-data-dir=assets=assets',
+        
         '--follow-imports',
         '--show-progress',
         '--assume-yes-for-downloads',
-        'main.py'
+        main_script
     ]
     
     # Adicionar ícone se existir
@@ -98,9 +105,9 @@ def empacotar():
         print("\n✓ Executável criado com sucesso!")
         
         # Verificar se o arquivo foi criado
-        if os.path.exists('SistemaLanchonete.exe'):
-            tamanho = os.path.getsize('SistemaLanchonete.exe') / (1024*1024)
-            print(f"✓ Arquivo: SistemaLanchonete.exe ({tamanho:.1f} MB)")
+        if os.path.exists(output_exe):
+            tamanho = os.path.getsize(output_exe) / (1024*1024)
+            print(f"✓ Arquivo: {output_exe} ({tamanho:.1f} MB)")
             return True
         else:
             print("✗ Erro: Executável não foi criado")
@@ -114,8 +121,8 @@ def criar_instalador():
     """Cria script de instalação/atualização"""
     script_instalador = """@echo off
 echo ================================
-echo  Sistema de Lanchonete v1.0.0
-echo  Instalador/Atualizador
+echo   Sistema de Lanchonete v1.0.0
+echo   Instalador/Atualizador
 echo ================================
 echo.
 
@@ -145,10 +152,10 @@ echo.
 pause
 """
     
-    with open('instalar.bat', 'w', encoding='utf-8') as f:
+    with open('instalar_python_e_executar.bat', 'w', encoding='utf-8') as f:
         f.write(script_instalador)
     
-    print("✓ Script de instalação criado: instalar.bat")
+    print("✓ Script de instalação criado: instalar_python_e_executar.bat")
 
 def main():
     """Função principal"""
@@ -156,7 +163,7 @@ def main():
     print("Preparando para empacotamento...\n")
     
     # Verificar se estamos no diretório correto
-    if not os.path.exists('main.py'):
+    if not os.path.exists('main_funcional.py'):
         print("✗ Erro: Execute este script no diretório raiz do projeto")
         return False
     
@@ -183,10 +190,10 @@ def main():
         
         print("\n=== EMPACOTAMENTO CONCLUÍDO ===")
         print("✓ Executável: SistemaLanchonete.exe")
-        print("✓ Instalador: instalar.bat")
+        print("✓ Instalador: instalar_python_e_executar.bat")
         print("\nPara distribuir:")
         print("1. Copie SistemaLanchonete.exe para o computador de destino")
-        print("2. Execute instalar.bat para configurar")
+        print("2. Execute instalar_python_e_executar.bat para configurar")
         print("3. Execute SistemaLanchonete.exe para usar o sistema")
         
         return True

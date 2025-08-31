@@ -16,7 +16,7 @@ f38c055db3e167774c3c06b652fd910cc9f0ba042a194f46a1964321a2b37483
 c872cf18d95379fe32eea20fb9252b1c
 
 📅 CERTIFICADO GERADO EM:
-29/08/2025 12:07:14
+30/08/2025 19:50:48
 
 ⚖️ AVISO LEGAL:
 Este software é protegido por direitos autorais.
